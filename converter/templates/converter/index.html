@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OCR - HandWriter Converter</title>
+    <link rel="stylesheet" href="{% static 'converter/upload.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<a href="{% url 'handwriting' %}" class="fancy-link">👉Generate Handwriting👈</a>
+
+<h1>OCR & HandWritten Converter</h1>
+
+<h2> Image to text converter </h2>
+
+<div id="form1">
+    <form id="ocrForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="image" id="ocrImageInput" accept="image/*" required>
+        <button type="submit">Extract</button>
+    </form>
+
+    <br>
+
+    {% if extracted_text %}
+        <p><strong>Extracted Text:</strong></p>
+        <textarea rows="10" cols="50" readonly>{{ extracted_text }}</textarea>
+        <br>
+        <a href="data:text/plain;charset=utf-8,{{ extracted_text|urlencode }}" download="ocr_result.txt" class="download-btn" style="margin-top: 10px; display: inline-flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-download"></i> Download Extracted Text
+        </a>
+    {% endif %}
+</div>
+
+<section id="features">
+    <h2>Features</h2>
+    <ul>
+        <li><strong>Handwritten Text Recognition:</strong> Upload images of handwritten notes or pages and extract editable digital text using OCR technology.</li>
+        <li><strong>Handwriting Generation:</strong> Convert typed text into realistic handwritten-style text with custom fonts.</li>
+        <li><strong>Easy-to-Use Interface:</strong> Simple forms for uploading images or typing text with clear buttons to extract or generate text.</li>
+        <li><strong>Clean & Intuitive Design:</strong> A user-friendly front end styled like paper with lined backgrounds and soft colors for an authentic writing feel.</li>
+        <li><strong>Multi-Format Support:</strong> Supports common image formats for upload and text input for versatile use.</li>
+        <li><strong>Fast Processing:</strong> Quick conversion for both OCR and handwriting generation, ideal for students, professionals, and creatives.</li>
+        <li><strong>Open Source & Customizable:</strong> Built with Django and customizable frontend, easy to extend or adapt.</li>
+    </ul>
+</section>
+
+<footer>
+    <p>Developed by <u>Chetan Prajapati</u> <i class="fa-regular fa-face-smile"></i></p>
+</footer>
+
+</body>
+</html>

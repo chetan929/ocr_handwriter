@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'converter/handwriting.css' %}">
+    <title>Handwriting Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<h1>OCR & HandWritten Converter</h1>
+
+<h2>Text to HandWritten Converter</h2>
+
+<div id="form2">
+    <form method="post">
+        {% csrf_token %}
+        <textarea name="text" rows="5" cols="50" placeholder="Write your text here...!" required></textarea>
+        <button type="submit">Generate</button>
+    </form>
+
+    {% if generated_image_data %}
+        <img src="{{ generated_image_data }}" alt="Handwriting Preview" />
+        <br><br>
+        <a href="{{ generated_image_data }}" download="handwriting.png" class="download-btn">
+            <i class="fa-solid fa-download"></i> Download Handwriting
+        </a>
+    {% endif %}
+</div>
+
+<div id="features">
+    <h2>Features</h2>
+    <ul>
+        <li><strong>Handwritten Text Recognition:</strong> Upload handwritten images and extract text.</li>
+        <li><strong>Handwriting Generation:</strong> Convert typed text to realistic handwriting.</li>
+        <li><strong>Simple Interface:</strong> Easy-to-use layout and buttons.</li>
+        <li><strong>Custom Font Support:</strong> Uses beautiful fonts like Caveat.</li>
+        <li><strong>Fast Output:</strong> Quick preview and download.</li>
+    </ul>
+</div>
+
+<footer>
+    <p>Developed by <u>Chetan Prajapati</u> <i class="fa-regular fa-face-smile"></i></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+body {
+  background-color: #f6f1eb;
+  /* soft paper color */
+  background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    /* horizontal lines */
+    linear-gradient(to right, #ff6f61 2px, transparent 2px),
+    /* pink left margin line */
+    radial-gradient(circle at bottom right, rgba(102, 51, 0, 0.3) 15%, transparent 40%),
+    /* brown glow bottom right */
+    radial-gradient(circle at top right, rgba(102, 51, 0, 0.25) 15%, transparent 40%);
+  /* brown glow top right */
+  background-size: 100% 30px, 40px 100%, 100% 100%, 100% 100%;
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat;
+  background-position: top left, 40px top, bottom right, top right;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2b2b2b;
+  padding: 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.fancy-link {
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+  color: #FF5733; /* initial color */
+  transition: color 0.3s ease;
+}
+
+.fancy-link:hover {
+  color: blue; /* color when hovered */
+}
+
+h1 {
+  font-family: 'Caveat', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 3rem;
+  color: #ff6f61;
+  /* warm coral/pink color to match margin line */
+  text-align: center;
+  margin-bottom: 0.5em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  letter-spacing: 1.5px;
+}
+
+/* Style all h2 elements */
+h2 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  font-size: 1.8rem;
+  border-bottom: 3px solid #ff6f61;
+  padding-bottom: 4px;
+  text-align: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* Add margin-top only to the second h2 inside the second div */
+div:nth-of-type(3) h2 {
+  margin-top: 40px;
+  /* adjust as needed */
+}
+
+#form1 {
+  height: 40%;
+  /* full viewport height */
+  display: flex;
+  /* use flexbox */
+  flex-direction: column;
+  /* stack input and button vertically */
+  justify-content: center;
+  /* vertical center */
+  align-items: center;
+  /* horizontal center */
+  gap: 1rem;
+  /* spacing between input and button */
+  background-color: #f6f1eb;
+  /* soft paper color to match your theme */
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 320px;
+  margin: auto;
+  margin-top: 40px;
+  /* center block horizontally if smaller screen */
+}
+
+/* Style input and button nicely */
+#form1 input[type="file"] {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#form1 button {
+  background-color: #ff6f61;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#form1 button:hover {
+  background-color: #e85a4f;
+}
+
+#features {
+  max-width: 800px;
+  margin: 60px auto;
+  /* Center horizontally with margin from top */
+  background-color: rgba(255, 255, 255, 0.85);
+  /* subtle background */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  line-height: 1.6;
+}
+
+#features h2 {
+  text-align: center;
+  color: #ff6f61;
+  border-bottom: 2px solid #ff6f61;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+}
+
+#features ul {
+  list-style: none;
+  padding: 0;
+}
+
+#features li {
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 20px;
+}
+
+#features li::before {
+  content: "✦";
+  position: absolute;
+  left: 0;
+  color: #ff6f61;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  font-family: 'Caveat', cursive;
+}
+
+/* New download button styling */
+.download-btn {
+  display: inline-block;
+  background-color: #ff6f61;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.download-btn:hover {
+  background-color: #e85a4f;
+  text-decoration: none;
+}
