@@ -1,13 +1,11 @@
-# converter/views.py
 import os
+import io
+import base64
 from django.conf import settings
 from django.shortcuts import render
 from django.http import JsonResponse
 from PIL import Image, ImageDraw, ImageFont
-import pytesseract
-import io
-import base64
-
+import easyocr
 
 def index(request):
     extracted_text = ""
@@ -15,13 +13,19 @@ def index(request):
         image_file = request.FILES['image']
         img = Image.open(image_file)
 
-        # OCR processing
-        extracted_text = pytesseract.image_to_string(img)
+        # Save temporarily to memory for easyocr
+        buffer = io.BytesIO()
+        img.save(buffer, format='PNG')
+        buffer.seek(0)
 
-        context = {
-            'extracted_text': extracted_text,
-        }
-        return render(request, 'converter/index.html', context)
+        # OCR processing using EasyOCR
+        reader = easyocr.Reader(['en'])
+        result = reader.readtext(buffer)
+
+        # Combine detected text
+        extracted_text = "\n".join([text[1] for text in result])
+
+        return render(request, 'converter/index.html', {'extracted_text': extracted_text})
 
     return render(request, 'converter/index.html')
 
@@ -35,12 +39,10 @@ def handwriting(request):
             font_size = 40
             font = ImageFont.truetype(font_path, font_size)
 
-            # Set fixed image width
             image_width = 800
             dummy_image = Image.new("RGB", (image_width, 1))
             draw = ImageDraw.Draw(dummy_image)
 
-            # Wrap text manually
             lines = []
             words = text.split()
             current_line = ""
@@ -61,7 +63,7 @@ def handwriting(request):
 
             y = 10
             for line in lines:
-                draw.text((10, y), line, font=font, fill=(0, 0, 255))  # Blue color
+                draw.text((10, y), line, font=font, fill=(0, 0, 255))
                 y += line_height
 
             buffered = io.BytesIO()
