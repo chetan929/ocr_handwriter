@@ -4,14 +4,13 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key secret in production!
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-qjc+!j$^-lm0d_d=6o98^2n%z48wp+b67ay37w)yi*+_uv^^po')
+SECRET_KEY = 'django-insecure-qjc+!j$^-lm0d_d=6o98^2n%z48wp+b67ay37w)yi*+_uv^^po'
 
-# DEBUG should be False in production
-DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
+# Debug enabled for local dev
+DEBUG = True
 
-# Add your Render app URL or '*' during testing
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'ocr-handwriter.onrender.com,localhost,127.0.0.1').split(',')
-
+# Allow localhost and local IPs only
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -25,7 +24,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add WhiteNoise middleware
+    # No whitenoise for local dev
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -60,20 +59,7 @@ DATABASES = {
     }
 }
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+AUTH_PASSWORD_VALIDATORS = []
 
 LANGUAGE_CODE = 'en-us'
 
@@ -85,12 +71,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+
+# For local dev, serve static files directly from app static folders
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'converter/static')]
 
-# This is where collectstatic will gather static files
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# Enable WhiteNoise static file serving optimization
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# No STATIC_ROOT or whitenoise for local dev
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
