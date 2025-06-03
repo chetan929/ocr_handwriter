@@ -10,7 +10,8 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-qjc+!j$^-lm0d_d=6o9
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
 # Add your Render app URL or '*' during testing
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'your-app.onrender.com').split(',')
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'ocr-handwriter.onrender.com,localhost,127.0.0.1').split(',')
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
